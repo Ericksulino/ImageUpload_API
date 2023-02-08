@@ -1,7 +1,7 @@
 const { json } = require("express");
 const Img = require("../models/Img")
 
-exports.create = async (req,res) =>{
+const create = async (req,res) =>{
     try{
 
         const {name} = req.body
@@ -20,4 +20,20 @@ exports.create = async (req,res) =>{
     } catch(error){
         res.status(500).json({mesage: "Erro ao salvar a imagem."})
     }
-} 
+} ;
+
+const findAll = async (req,res) =>{
+    try{
+        const imagens = await Img.find()
+
+        res.status(200).json(imagens);
+
+    } catch (error){
+        res.status(500).json({message:"Erro ao buscar imagens."})
+    }
+}
+ 
+module.exports = {
+    create,
+    findAll,
+}
