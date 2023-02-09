@@ -1,6 +1,8 @@
 const express = require("express");
+const cors =  require('cors')
 
 const app = express()
+app.use(express.static('./src/uploads'));
 
 require("dotenv").config();
 
@@ -12,7 +14,7 @@ connectDatabase()
 const port =process.env.PORT || 3052;
 
 const imgRouter = require("./src/routes/img.route");
-
+app.use(cors())
 app.use("/imagens",imgRouter);
 
 app.listen(port,() =>{
